@@ -30,7 +30,11 @@ function findSteps(id) {
 		.orderBy('step_number');
 }
 function add(scheme) {
-	return db('schemes').insert(scheme);
+	return db('schemes')
+		.insert(scheme, 'id')
+		.then(id => {
+			return findById(id[0]);
+		});
 }
 function update() {
 	// to do
